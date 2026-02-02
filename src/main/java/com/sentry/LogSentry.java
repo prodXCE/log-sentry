@@ -9,8 +9,10 @@ import java.util.regex.Pattern;
 public class LogSentry {
     public static void main(String[] args) {
 
+        Database.initialize();
+
         String regex = "^([A-Z][a-z]{2}\\s+\\d+\\s\\d{2}:\\d{2}:\\d{2})\\s+(\\S+)\\s+([^:]+):\\s+(.*)$";
-        Pattern pattern = Pattern.compile[regex];
+        Pattern pattern = Pattern.compile(regex);
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
 
