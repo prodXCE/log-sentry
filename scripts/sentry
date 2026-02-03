@@ -1,0 +1,25 @@
+#!/bin/bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+PROJECT_ROOT="$SCRIPT_DIR/.."
+
+LIBS="$PROJECT_ROOT/lib/sqlite-jdbc.jar"
+CLASSES="$PROJECT_ROOT"
+
+# --- ADD THESE DEBUG LINES ---
+echo "[DEBUG] Script Location: $SCRIPT_DIR"
+echo "[DEBUG] Project Root:    $PROJECT_ROOT"
+echo "[DEBUG] Looking for Jar: $LIBS"
+# Check if the file actually exists
+if [ -f "$LIBS" ]; then
+    echo "[DEBUG] Status:          FOUND"
+else
+    echo "[DEBUG] Status:          MISSING (This is the problem!)"
+fi
+echo "------------------------------------------------"
+# -----------------------------
+
+java \
+  --enable-native-access=ALL-UNNAMED \
+  -cp "$CLASSES:$LIBS" \
+  com.sentry.LogSentry "$@"
